@@ -6,20 +6,8 @@ name = "pypi"
 [packages]
 requests = "*"
 beautifulsoup4 = "*"
-ipykernel = "*"
-boto3 = "*"
 pandas = "*"
 numpy = "*"
-jinja2 = "*"
-praw = "*"
-python-dotenv = "*"
-textblob = "*"
-nltk = "*"
-scikit-learn = "*"
-joblib = "*"
-openai = "*"
-networkx = "*"
-tiktoken = "*"
 
 [dev-packages]
 
