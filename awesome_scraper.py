@@ -57,6 +57,30 @@ def is_valid_github_repo_url(url):
     return False
 
 
+def clean_github_url(url):
+    """
+    Clean the GitHub URL by stripping any hash fragments, query parameters,
+    or anything after the repository path.
+
+    Args:
+    url (str): The GitHub repository URL.
+
+    Returns:
+    str: The cleaned GitHub repository URL.
+    """
+    parsed_url = urlparse(url)
+
+    # Ensure we're only working with the repository path (e.g., https://github.com/owner/repo)
+    path_parts = parsed_url.path.strip("/").split("/")
+
+    if len(path_parts) >= 2:
+        # Reconstruct the URL with only the scheme, netloc, and first two path segments
+        clean_path = "/".join(path_parts[:2])
+        return f"{parsed_url.scheme}://{parsed_url.netloc}/{clean_path}"
+
+    return url  # Return the original URL if it doesn't match the expected format
+
+
 def extract_github_links(url):
     """
     Given a URL, this function fetches all valid GitHub repository links from the page.
@@ -256,6 +280,7 @@ def main():
 
     print(f"Extracting GitHub links from {args.url}...")
     github_links = extract_github_links(args.url)
+    github_links = [clean_github_url(link) for link in github_links]
 
     if not github_links:
         print("No valid GitHub repository links found on the page.")
