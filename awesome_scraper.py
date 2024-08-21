@@ -19,6 +19,7 @@ BLACKLISTED_OWNERS = [
     "collections",
     "enterprise",
     "solutions",
+    "sponsors",
 ]
 
 
